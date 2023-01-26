@@ -1,0 +1,25 @@
+{
+  "name": "blog-counter",
+  "version": "0.0.1",
+  "description": "Just a simple SVG counter for the static blog",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i9or/blog-counter.git"
+  },
+  "keywords": [
+    "blog",
+    "counter",
+    "svg",
+    "redis"
+  ],
+  "author": "Igor <dont@bzzr.me> (https://ignorethis.page/)",
+  "license": "AGPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/i9or/blog-counter/issues"
+  },
+  "homepage": "https://github.com/i9or/blog-counter#readme"
+}
