@@ -1,55 +1,12 @@
 {
   "name": "blog-counter",
-  "version": "0.0.1",
-  "description": "Just a simple SVG counter for the static blog",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "vitest",
-    "test:coverage": "vitest --coverage",
-    "start": "node ./dist/index.js",
-    "clean": "del ./dist",
-    "build:dev": "esbuild ./src/main.ts --bundle --sourcemap --platform=node --outfile=./dist/index.js",
-    "build:prod": "cross-env NODE_ENV=production esbuild ./src/main.ts --bundle --minify --platform=node --outfile=./dist/index.js",
-    "build": "npm run clean && npm run build",
-    "watch:dev": "npm run build:dev -- --watch",
-    "watch:node": "nodemon -d 100ms --watch dist dist/index.js",
-    "watch": "concurrently -n \"BUILD,NODE\" -c \"blue,green\" \"npm:watch:dev\" \"npm:watch:node\"",
-    "prepare": "node -e \"try { require('husky').install() } catch (e) {if(e.code !== 'MODULE_NOT_FOUND') throw e}\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/i9or/blog-counter.git"
-  },
-  "keywords": [
-    "blog",
-    "counter",
-    "svg",
-    "redis"
-  ],
-  "author": "Igor <dont@bzzr.me> (https://ignorethis.page/)",
-  "license": "AGPL-3.0-only",
-  "bugs": {
-    "url": "https://github.com/i9or/blog-counter/issues"
-  },
-  "homepage": "https://github.com/i9or/blog-counter#readme",
+  "module": "src/index.ts",
+  "type": "module",
   "devDependencies": {
-    "@tinyhttp/app": "2.0.29",
-    "@tinyhttp/logger": "1.3.0",
-    "@types/node": "18.11.18",
-    "@vitest/coverage-c8": "0.28.2",
-    "concurrently": "7.6.0",
-    "cross-env": "7.0.3",
-    "del-cli": "5.0.0",
-    "esbuild": "0.17.4",
-    "husky": "8.0.3",
-    "lint-staged": "13.1.0",
-    "nodemon": "2.0.20",
-    "prettier": "2.8.3",
-    "typescript": "4.9.4",
-    "vite": "4.0.4",
-    "vitest": "0.28.2"
+    "bun-types": "1.0.1",
+    "prettier": "3.0.3"
   },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+  "peerDependencies": {
+    "typescript": "5.2.2"
   }
 }
