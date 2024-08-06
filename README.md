@@ -4,6 +4,6 @@ Simple old school hit counter for the static blog.
 
 ## Tech Stack
 
-* Go
-* PostgreSQL
+* Bun
+* SQLite
 * Ansible
