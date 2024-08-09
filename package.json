@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "bun src/index.ts",
-    "watch": "bun --watch src/index.ts"
+    "watch": "bun --watch src/index.ts",
+    "build": "bun build src/index.ts --compile --outfile dist/blog-counter"
   },
   "devDependencies": {
     "bun-types": "1.1.21",
