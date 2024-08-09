@@ -1,35 +1,50 @@
-import { BunFile } from "bun";
-import { resolve } from "node:path";
+import favicon from "./assets/favicon.ico";
+import { sanitize } from "./utilities/sanitize.ts";
+import { ERROR_COUNT } from "./utilities/constants.ts";
+import {
+  getCount,
+  incrementCountTransaction,
+} from "./db.ts";
+import { renderCounter } from "./utilities/renderCounter.ts";
 
-import { Counter } from "./templates/Counter.ts";
-
-let count = 0;
-let iconFile: BunFile | undefined = undefined;
+let iconFile = Bun.file(favicon);
 
 const server = Bun.serve({
   port: 4005,
+  development: false,
   fetch(req) {
     const path = new URL(req.url).pathname;
 
     if (req.method === "GET" && path === "/count-me-in-scotty") {
-      return new Response(Counter(count++), {
-        status: 200,
-        headers: {
-          "Content-Type": "image/svg+xml",
-        },
-      });
+      const referer = req.headers.get("referer");
+
+      if (!referer || referer === "") {
+        return renderCounter(Math.floor(Math.random() * 1000000));
+      }
+
+      try {
+        const sanitizedReferer = sanitize(referer);
+
+        incrementCountTransaction(sanitizedReferer);
+        const result = getCount.get(sanitizedReferer);
+
+        if (!result) {
+          return renderCounter(ERROR_COUNT);
+        }
+
+        return renderCounter(result.count);
+      } catch (err) {
+        console.error(err);
+
+        return renderCounter(ERROR_COUNT);
+      }
     }
 
     if (req.method === "GET" && path === "/are-you-alright") {
-      return new Response("Never been better, thanks!");
+      return Response.json({ message: "Never been better, thanks!" });
     }
 
     if (req.method === "GET" && path === "/favicon.ico") {
-      if (!iconFile) {
-        const iconPath = resolve(import.meta.dir, "../public/favicon.ico");
-        iconFile = Bun.file(iconPath);
-      }
-
       return new Response(iconFile);
     }
 

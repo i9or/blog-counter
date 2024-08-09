@@ -1,10 +1,12 @@
 {
   "name": "blog-counter",
+  "version": "0.1.0",
+  "private": true,
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
     "start": "bun src/index.ts",
-    "dev": "bun --watch src/index.ts"
+    "watch": "bun --watch src/index.ts"
   },
   "devDependencies": {
     "bun-types": "1.1.21",

@@ -1,12 +1,32 @@
 # Blog Counter
 
-Simple old school hit counter for the static blog.
+Simple old school SVG hit counter for the static blog.
 
 ## Tech Stack
 
 * Bun
 * SQLite
 * Ansible
+
+## Development
+
+Install dependencies:
+
+```bash
+bun install
+```
+
+Run development server:
+
+```bash
+bun run watch
+```
+
+Run production server:
+
+```bash
+bun start
+```
 
 ## License
 
