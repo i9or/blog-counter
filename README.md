@@ -42,6 +42,12 @@ Then run the executable:
 ./dist/blog-counter
 ```
 
+Run the service with custom database path:
+
+```bash
+DB_PATH=/path/to/db.sqlite ./dist/blog-counter
+```
+
 ## License
 
 Code is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 only.
