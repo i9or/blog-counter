@@ -28,6 +28,8 @@ Run production server:
 bun start
 ```
 
+Database path could be provided via `DB_PATH` environment variable.
+
 ## License
 
 Code is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 only.
