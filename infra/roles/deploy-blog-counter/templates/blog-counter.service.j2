@@ -1,0 +1,12 @@
+[Unit]
+Description=Blog Counter
+After=network.target
+
+[Service]
+Environment="DB_PATH={{ db_path }}"
+ExecStart= "{{ current_release_path }}/dist/blog-counter"
+User=deploy
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+- name: Run blog counter as a service
+  become: yes
+  systemd:
+    name: blog-counter
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  vars:
+    ansible_become: yes

@@ -1,0 +1,13 @@
+---
+- name: Backup current release
+  become: yes
+  import_tasks: backup.yml
+
+- name: Download new release and make it current
+  import_tasks: release.yml
+
+- name: Create systemd service
+  import_tasks: service.yml
+
+- name: Run the service
+  import_tasks: run.yml

@@ -1,0 +1,27 @@
+- name: Remove previous backup
+  file:
+    path: "{{ backup_release_path }}"
+    state: absent
+
+- name: Find current deployment
+  stat:
+    path: "{{ current_release_path }}"
+  register: current_deployment
+
+- name: Check if the service exists
+  stat:
+    path: /etc/systemd/system/blog-counter.service
+  register: service_file
+
+- name: Stop the service
+  become: yes
+  systemd:
+    name: blog-counter
+    state: stopped
+  vars:
+    ansible_become: yes
+  when: service_file.stat.exists
+
+- name: Backup current deployment
+  command: "mv {{ current_release_path }} {{ backup_release_path }}"
+  when: current_deployment.stat.exists

@@ -1,0 +1,5 @@
+---
+downloads_path: /tmp/downloads
+current_release_path: /home/deploy/blog-counter
+backup_release_path: /home/deploy/blog-counter_bak
+db_path: /home/deploy/blog-counter/main.sqlite
