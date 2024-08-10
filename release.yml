@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.1.21
+      - name: Set application version
+        run: echo "BLOG_COUNTER_VERSION=v$(bun run getVersion.ts | xargs)" >> $GITHUB_ENV
+      - run: bun run build
+      - name: Create release assets
+        run: |
+          tar -czvf build.tgz -C dist .
+      - name: Publish release on GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create $BLOG_APPLICATION_VERSION ./*.tgz --generate-notes
