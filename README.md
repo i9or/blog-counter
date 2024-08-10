@@ -6,7 +6,6 @@ Simple old school SVG hit counter for the static blog.
 
 * Bun
 * SQLite
-* Ansible
 
 ## Development
 
