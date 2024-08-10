@@ -1,16 +1,13 @@
 import favicon from "./assets/favicon.ico";
 import { sanitize } from "./utilities/sanitize.ts";
 import { ERROR_COUNT } from "./utilities/constants.ts";
-import {
-  getCount,
-  incrementCountTransaction,
-} from "./db.ts";
+import { getCount, incrementCountTransaction } from "./db.ts";
 import { renderCounter } from "./utilities/renderCounter.ts";
 
 let iconFile = Bun.file(favicon);
 
 const server = Bun.serve({
-  port: 4005,
+  port: Bun.env.PORT ? parseInt(Bun.env.PORT) : 4005,
   development: false,
   fetch(req) {
     const path = new URL(req.url).pathname;
