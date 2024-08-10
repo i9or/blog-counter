@@ -1,0 +1,29 @@
+- name: Install packages
+  apt:
+    name:
+      - curl
+      - vim
+      - sudo
+      - gnupg2
+    state: present
+    update_cache: yes
+
+- name: Create user for deployment
+  user:
+    name: deploy
+    comment: Deployment user
+    group: sudo
+
+- name: Allow user to use sudo without password
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    insertafter: "^@includedir"
+    line: "deploy ALL=(ALL) NOPASSWD: ALL"
+    validate: "visudo -cf %s"
+
+- name: Set authorized key
+  authorized_key:
+    user: deploy
+    state: present
+    key: "{{ lookup('file', public_key_local_path) }}"

@@ -1,0 +1,24 @@
+- name: Make a directory for release assets
+  file:
+    path: "{{ downloads_path }}/release"
+    state: directory
+
+- name: Download latest release
+  command: 'gh release download -p "build.tgz" -D {{ downloads_path }} -R i9or/blog-counter --clobber'
+  environment:
+    GITHUB_TOKEN: "{{ gh_token }}"
+
+- name: Extract release archive
+  unarchive:
+    src: "{{ downloads_path }}/build.tgz"
+    dest: "{{ downloads_path }}/release"
+    remote_src: yes
+
+- name: Make extracted release current
+  become: yes
+  command: "mv {{ downloads_path }}/release {{ current_release_path }}"
+
+- name: Clean up
+  file:
+    path: "{{ downloads_path }}"
+    state: absent

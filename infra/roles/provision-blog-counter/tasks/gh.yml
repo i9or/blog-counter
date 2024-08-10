@@ -1,0 +1,16 @@
+- name: Import GitHub CLI GPG key
+  apt_key:
+    url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+    id: 23F3D4EA75716059
+    state: present
+
+- name: Add GitHub CLI repository
+  apt_repository:
+    repo: deb https://cli.github.com/packages stable main
+    state: present
+
+- name: Install GitHub CLI
+  apt:
+    name: gh
+    state: present
+    update_cache: yes
