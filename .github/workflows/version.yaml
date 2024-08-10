@@ -1,0 +1,23 @@
+name: Version check
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.1.21
+
+      - name: Compare PR version and latest release version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR_VERSION="v$(bun run getVersion.ts | xargs)"
+          LATEST_RELEASE_VERSION=$(gh release view --json tagName -q '.tagName')
+          [[ "$PR_VERSION" != "$LATEST_RELEASE_VERSION" ]] && exit 0
