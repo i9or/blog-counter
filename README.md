@@ -30,6 +30,18 @@ bun start
 
 Database path could be provided via `DB_PATH` environment variable.
 
+Build for production:
+
+```bash
+bun run build
+```
+
+Then run the executable:
+
+```bash
+./dist/blog-counter
+```
+
 ## License
 
 Code is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 only.
