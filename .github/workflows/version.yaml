@@ -19,4 +19,6 @@ jobs:
         run: |
           PR_VERSION="v$(bun run getVersion.ts | xargs)"
           LATEST_RELEASE_VERSION=$(gh release view --json tagName -q '.tagName')
+          echo $PR_VERSION
+          echo $LATEST_RELEASE_VERSION
           [[ "$PR_VERSION" != "$LATEST_RELEASE_VERSION" ]] && exit 0
